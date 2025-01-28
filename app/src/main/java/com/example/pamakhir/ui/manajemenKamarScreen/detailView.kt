@@ -1,5 +1,6 @@
 package com.example.pamakhir.ui.manajemenKamarScreen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -117,17 +118,16 @@ fun DetailContent(
             }
         }
         Button(
-            onClick = { onUpdateClick(kamar.id) },
+
+            onClick = {
+                Log.d("UpdateButton", "ID Kamar yang akan diupdate: ${kamar.id}")
+
+                onUpdateClick(kamar.id) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Update Data")
         }
-        Button(
-            onClick = { onUpdateClick(kamar.id) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Tambah Pembayaran")
-        }
+
     }
 }
 
