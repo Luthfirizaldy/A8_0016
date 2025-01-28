@@ -28,6 +28,8 @@ class NetworkKamarRepository(
     }
 
     override suspend fun updateKamar(id: String, kamar: Kamar) {
+        Log.d("UpdateKamar", "ID yang diterima: $id") // Log ID yang diterima
+        Log.d("UpdateKamar", "Data Kamar yang diterima: $kamar")
         kamarApiService.updateKamar(id,kamar)
     }
     override suspend fun deleteKamar(id: String) {
