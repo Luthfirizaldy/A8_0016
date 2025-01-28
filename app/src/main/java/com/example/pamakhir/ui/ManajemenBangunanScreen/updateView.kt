@@ -51,7 +51,7 @@ fun UpdateBangunanView(
     ) { innerPadding ->
         UpdateBody(
             updateUiState = viewModel.uiState,
-            onSiswaValueChange = viewModel::updateInsertBngnanState,
+            onBangunanValueChange = viewModel::updateInsertBngnanState,
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.updateBangunan()
@@ -69,7 +69,7 @@ fun UpdateBangunanView(
 @Composable
 fun UpdateBody(
     updateUiState: UpdateUiState,
-    onSiswaValueChange: (InsertUiEvent) -> Unit,
+    onBangunanValueChange: (InsertUiEvent) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -79,7 +79,7 @@ fun UpdateBody(
     ) {
         FormInput(
             insertUiEvent = updateUiState.insertUiEvent,
-            onValueChange = onSiswaValueChange,
+            onValueChange = onBangunanValueChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(
