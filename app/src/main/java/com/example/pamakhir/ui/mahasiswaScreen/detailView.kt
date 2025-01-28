@@ -22,11 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.pamakhir.model.Mahasiswa
 import com.example.pamakhir.ui.CustomTopAppBar
 import com.example.pamakhir.ui.MahasiswaviewModel.DetailUiState
 import com.example.pamakhir.ui.MahasiswaviewModel.DetailViewModel
 import com.example.pamakhir.ui.MahasiswaviewModel.PenyediaViewModel
+import com.example.pamakhir.ui.manajemenPembayaranScreen.DestinasiPembayaranEntry
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,6 +37,7 @@ fun DetailMahasiswaview(
     navigateBack: () -> Unit,
     onUpdateClick: (String) -> Unit,
     modifier: Modifier = Modifier,
+    navController: NavHostController,  // Pastikan ini ada
     viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val detailUiState = viewModel.detailUiState.collectAsState().value
@@ -60,7 +63,9 @@ fun DetailMahasiswaview(
                 is DetailUiState.Success -> DetailContent(
                     mahasiswa = detailUiState.mahasiswa,
                     onUpdateClick = onUpdateClick,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    navController = navController,  // pastikan disertakan di sini
+
                 )
                 is DetailUiState.Error -> OnError(retryAction = { viewModel.getDetailMahasiswa(id) })
             }
@@ -72,7 +77,9 @@ fun DetailMahasiswaview(
 fun DetailContent(
     mahasiswa: Mahasiswa,
     onUpdateClick: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController  // pastikan ada di sini
+
 ) {
     Column(
         modifier = modifier
@@ -126,11 +133,11 @@ fun DetailContent(
         ) {
             Text(text = "Update Data")
         }
-        Button(
-            onClick = { onUpdateClick(mahasiswa.id) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Tambah Pembayaran")
+        Button(onClick = {
+            // Menavigasi ke halaman insert pembayaran (EntryPbrScreen)
+            navController.navigate(DestinasiPembayaranEntry.route)
+        }) {
+            Text("Tambah Pembayaran")
         }
     }
 }
