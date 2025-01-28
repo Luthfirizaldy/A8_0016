@@ -98,15 +98,15 @@ fun DetailContent(
                     style = MaterialTheme.typography.titleLarge
                 )
                 Text(
-                    text = "Nama: ${bangunan.namaBangunan}",
+                    text = "Nama Bangunan: ${bangunan.namaBangunan}",
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = "Email: ${bangunan.jumlahLantai}",
+                    text = "Jumlah Lantai: ${bangunan.jumlahLantai}",
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = "No Telepon: ${bangunan.alamat}",
+                    text = "Alamat: ${bangunan.alamat}",
                     style = MaterialTheme.typography.titleMedium
                 )
 
@@ -119,12 +119,7 @@ fun DetailContent(
         ) {
             Text(text = "Update Data")
         }
-        Button(
-            onClick = { onUpdateClick(bangunan.id) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Tambah Pembayaran")
-        }
+
     }
 }
 
