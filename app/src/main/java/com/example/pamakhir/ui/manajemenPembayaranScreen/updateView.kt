@@ -1,4 +1,4 @@
-package com.example.pamakhir.ui.manajemenKamarScreen
+package com.example.pamakhir.ui.manajemenPembayaranScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,16 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pamakhir.ui.CustomTopAppBar
-import com.example.pamakhir.ui.manajemenKamarViewModel.InsertUiEvent
-import com.example.pamakhir.ui.manajemenKamarViewModel.PenyediaViewModel
-import com.example.pamakhir.ui.manajemenKamarViewModel.UpdateUiState
-import com.example.pamakhir.ui.manajemenKamarViewModel.UpdateViewModel
+import com.example.pamakhir.ui.manajemenPembayaranViewModel.InsertUiEvent
+import com.example.pamakhir.ui.manajemenPembayaranViewModel.PenyediaViewModel
+import com.example.pamakhir.ui.manajemenPembayaranViewModel.UpdateUiState
+import com.example.pamakhir.ui.manajemenPembayaranViewModel.UpdateViewModel
+
 
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UpdateView(
+fun UpdatePembayaranView(
     id: String,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
@@ -37,24 +38,24 @@ fun UpdateView(
 
     // Muat data kamar berdasarkan ID
     LaunchedEffect(id) {
-        viewModel.loadingKamarData(id)
+        viewModel.loadingPembayaranData(id)
     }
 
     Scaffold(
         topBar = {
             CustomTopAppBar(
-                title = "Update Kamar",
+                title = "Update Pembayaran",
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
         }
     ) { innerPadding ->
         UpdateBody(
-            updateUiState = viewModel.uiStateKamar,
-            onKamarValueChange = viewModel::updateInsertKmrState,
+            updateUiState = viewModel.uiStatePembayaran,
+            onPembayaranValueChange = viewModel::updateInsertPbrState,
             onSaveClick = {
                 coroutineScope.launch {
-                    viewModel.updateKamar()
+                    viewModel.updatePembayaran()
                     navigateBack()
                 }
             },
@@ -69,7 +70,7 @@ fun UpdateView(
 @Composable
 fun UpdateBody(
     updateUiState: UpdateUiState,
-    onKamarValueChange: (InsertUiEvent) -> Unit,
+    onPembayaranValueChange: (InsertUiEvent) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -79,7 +80,7 @@ fun UpdateBody(
     ) {
         FormInput(
             insertUiEvent = updateUiState.insertUiEvent,
-            onValueChange = onKamarValueChange,
+            onValueChange = onPembayaranValueChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(
