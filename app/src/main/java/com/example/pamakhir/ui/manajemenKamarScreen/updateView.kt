@@ -1,5 +1,6 @@
 package com.example.pamakhir.ui.manajemenKamarScreen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,7 +28,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UpdateView(
+fun UpdateKamarView(
     id: String,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
@@ -35,8 +36,9 @@ fun UpdateView(
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    // Muat data kamar berdasarkan ID
+    // Muat data mahasiswa berdasarkan ID
     LaunchedEffect(id) {
+        Log.d("launch", "ID yang di terima : $id")
         viewModel.loadingKamarData(id)
     }
 
@@ -51,7 +53,7 @@ fun UpdateView(
     ) { innerPadding ->
         UpdateBody(
             updateUiState = viewModel.uiStateKamar,
-            onKamarValueChange = viewModel::updateInsertKmrState,
+            onSiswaValueChange = viewModel::updateInsertKmrState,
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.updateKamar()
@@ -69,7 +71,7 @@ fun UpdateView(
 @Composable
 fun UpdateBody(
     updateUiState: UpdateUiState,
-    onKamarValueChange: (InsertUiEvent) -> Unit,
+    onSiswaValueChange: (InsertUiEvent) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -79,7 +81,7 @@ fun UpdateBody(
     ) {
         FormInput(
             insertUiEvent = updateUiState.insertUiEvent,
-            onValueChange = onKamarValueChange,
+            onValueChange = onSiswaValueChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(
