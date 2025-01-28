@@ -24,7 +24,9 @@ class NetworkPembayaranRepository(
         pembayaranApiService.getAllPembayaran()
 
     override suspend fun insertPembayaran(pembayaran: Pembayaran) {
-        pembayaranApiService.insertPembayaran(pembayaran)
+        val pmbr = pembayaranApiService.insertPembayaran(pembayaran)
+        Log.d("PembayaranAPI", "Response: $pembayaran")
+
     }
 
     override suspend fun updatePembayaran(id: String, pembayaran: Pembayaran) {
