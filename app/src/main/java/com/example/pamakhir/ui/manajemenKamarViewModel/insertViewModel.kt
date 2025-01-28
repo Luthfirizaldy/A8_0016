@@ -39,7 +39,7 @@ data class InsertUiState(
 data class InsertUiEvent(
     val id:String = "",
     val nomorKamar:String = "",
-    val idBangunan :String = "",
+    val idBangunan:String = "",
     val kapasitas:String = "",
     val statusKamar:String = "",
 )
