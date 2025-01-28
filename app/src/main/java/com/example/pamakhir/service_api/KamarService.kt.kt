@@ -1,6 +1,7 @@
 package com.example.pamakhir.service_api
 
 import com.example.pamakhir.model.Kamar
+import com.example.pamakhir.model.Mahasiswa
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
