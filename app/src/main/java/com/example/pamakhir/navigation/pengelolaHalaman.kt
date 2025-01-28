@@ -1,5 +1,6 @@
 package com.example.pamakhir.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -11,6 +12,7 @@ import com.example.pamakhir.ui.ManajemenBangunanScreen.DestinasiBangunanEntry
 import com.example.pamakhir.ui.ManajemenBangunanScreen.DestinasiHomeBangunan
 import com.example.pamakhir.ui.ManajemenBangunanScreen.DetailBangunanView
 import com.example.pamakhir.ui.ManajemenBangunanScreen.EntryBgnanScreen
+import com.example.pamakhir.ui.ManajemenBangunanScreen.UpdateBangunanView
 import com.example.pamakhir.ui.home.DestinasiHome
 import com.example.pamakhir.ui.home.HomeScreen
 import com.example.pamakhir.ui.mahasiswaScreen.DestinasiEntry
@@ -24,11 +26,13 @@ import com.example.pamakhir.ui.manajemenKamarScreen.DestinasiHomeKamar
 import com.example.pamakhir.ui.manajemenKamarScreen.DetailKamarview
 import com.example.pamakhir.ui.manajemenKamarScreen.EntryKmrScreen
 import com.example.pamakhir.ui.manajemenKamarScreen.KamarHomeScreen
+import com.example.pamakhir.ui.manajemenKamarScreen.UpdateKamarView
 import com.example.pamakhir.ui.manajemenPembayaranScreen.DestinasiHomePembayaran
 import com.example.pamakhir.ui.manajemenPembayaranScreen.DestinasiPembayaranEntry
 import com.example.pamakhir.ui.manajemenPembayaranScreen.DetailPembayaranview
 import com.example.pamakhir.ui.manajemenPembayaranScreen.EntryPbrScreen
 import com.example.pamakhir.ui.manajemenPembayaranScreen.PembayaranHomeScreen
+import com.example.pamakhir.ui.manajemenPembayaranScreen.UpdatePembayaranView
 
 @Composable
 fun PengelolaHalaman(
@@ -130,23 +134,32 @@ fun PengelolaHalaman(
         }
 
 
+        composable(DestinasiPembayaranEntry.route) {
+            EntryPbrScreen(navigateBack = { navController.popBackStack() })
+        }
+
+
+
         composable("detail/Mahasiswa/{id}") { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id") ?: ""
             DetailMahasiswaview(
                 id = id,
+                navController = navController,  // Menambahkan navController di sini
                 navigateBack = { navController.popBackStack() },
                 onUpdateClick = { id ->
-                    navController.navigate("detail/Mahasiswa/{id}")
+                    navController.navigate("update/Mahasiswa/$id")
                 }
             )
         }
+
         composable("detail/kamar/{id}") { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id") ?: ""
             DetailKamarview(
                 id = id,
                 navigateBack = { navController.popBackStack() },
                 onUpdateClick = { id ->
-                    navController.navigate("detail/kamar/{id}")
+                    Log.d("detailKamar","Id :$id")
+                    navController.navigate("update/kamar/$id")
                 }
             )
         }
@@ -171,13 +184,40 @@ fun PengelolaHalaman(
                 }
             )
         }
-        composable("update/{id}") { backStackEntry ->
+
+
+        composable("update/Mahasiswa/{id}") { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id") ?: ""
             UpdateView(
                 id = id,
                 navigateBack = { navController.popBackStack() }
             )
         }
+        composable("update/{id}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
+            UpdateBangunanView(
+                id = id,
+                navigateBack = { navController.popBackStack() }
+            )
+        }
+        composable("update/pembayaran/{id}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
+            UpdatePembayaranView(
+                id = id,
+                navigateBack = { navController.popBackStack() }
+            )
+        }
+        composable("update/kamar/{id}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
+            Log.d("Navigation", "ID yang diterima di composable: $id") // Log ID yang diterima
+
+            UpdateKamarView(
+                id = id,
+                navigateBack = { navController.popBackStack() }
+            )
+        }
+
+
 
     }
 }
