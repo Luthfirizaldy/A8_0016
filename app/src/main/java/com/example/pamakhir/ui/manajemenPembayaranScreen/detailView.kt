@@ -38,6 +38,7 @@ fun DetailPembayaranview(
     onUpdateClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory)
+
 ) {
     val detailUiState = viewModel.detailUiState.collectAsState().value
 
@@ -74,7 +75,8 @@ fun DetailPembayaranview(
 fun DetailContent(
     pembayaran: Pembayaran,
     onUpdateClick: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+
 ) {
     Column(
         modifier = modifier
@@ -123,12 +125,7 @@ fun DetailContent(
         ) {
             Text(text = "Update Data")
         }
-        Button(
-            onClick = { onUpdateClick(pembayaran.id) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Tambah Pembayaran")
-        }
+        
     }
 }
 
