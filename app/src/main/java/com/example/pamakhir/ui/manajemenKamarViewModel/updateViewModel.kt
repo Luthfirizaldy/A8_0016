@@ -1,5 +1,6 @@
 package com.example.pamakhir.ui.manajemenKamarViewModel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,10 +16,12 @@ class UpdateViewModel(private val kmrRepository: KamarRepository) : ViewModel() 
         private set
 
     // Fetch existing Mahasiswa data based on ID and set the state
-    fun loadingKamarData(kamarId: String) {
+    fun loadingKamarData(KamarId: String) {
         viewModelScope.launch {
             try {
-                val kamar = kmrRepository.getKamarById(kamarId)
+                Log.d("LoadingKamarData", "ID yang diterima: $KamarId")
+
+                val kamar = kmrRepository.getKamarById(KamarId)
                 uiStateKamar = UpdateUiState(insertUiEvent = kamar.toInsertUiEvent())
             } catch (e: Exception) {
                 e.printStackTrace()
