@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class Kamar(
     val id: String,
     val nomorKamar: String,
-    val idBangunan : String,
+    val idBangunan: String,
     val kapasitas: String,
     val statusKamar: String
 )
